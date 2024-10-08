@@ -1,29 +1,22 @@
-/**
- * A WeakMap to keep track of API endpoints and their respective call counts.
- */
-export const endpointCallTracker = new WeakMap();
+// Create an instance of WeakMap
+export const weakMap = new WeakMap();
 
-/**
- * The maximum allowed number of calls to an API endpoint.
- */
-const MAX_CALLS = 5;
-
-/**
- * Monitors the number of requests made to a specific API endpoint.
- * @param {Object} endpoint - The API endpoint to track.
- * @param {String} endpoint.protocol - The protocol used by the endpoint (e.g., 'http').
- * @param {String} endpoint.name - The name or address of the API endpoint.
- * @throws {Error} - Throws an error if the number of calls exceeds the allowed limit.
- */
-export function monitorAPICalls(endpoint) {
-  if (!endpointCallTracker.has(endpoint)) {
-    endpointCallTracker.set(endpoint, 0);
+export const queryAPI = (endpoint) => {
+  // Check if the endpoint is already in the WeakMap
+  if (!weakMap.has(endpoint)) {
+    // Initialize the count to 0 if not already present
+    weakMap.set(endpoint, 0);
   }
+
+  // Get the current count for the endpoint
+  const currentCount = weakMap.get(endpoint);
   
-  const callCount = endpointCallTracker.get(endpoint) + 1;
-  endpointCallTracker.set(endpoint, callCount);
-  
-  if (callCount >= MAX_CALLS) {
+  // Increment the count
+  weakMap.set(endpoint, currentCount + 1);
+
+  // Check if the count is >= 5
+  if (currentCount + 1 >= 5) {
     throw new Error('Endpoint load is high');
   }
-}
+};
+
