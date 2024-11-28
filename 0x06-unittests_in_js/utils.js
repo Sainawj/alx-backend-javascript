@@ -1,41 +1,21 @@
-// Define the Utils class with static methods
-class Utils {
-    // Static method to calculate numbers based on the operation type (SUM, SUBTRACT, DIVIDE)
-    static calculateNumber(type, a, b) {
-        // Round both input numbers to the nearest integer
-        const an = Math.round(a);
-        const bn = Math.round(b);
-
-        // Initialize variable to store the result
-        let c = 0;
-
-        // Perform calculation based on the provided operation type
-        switch (type) {
-            // Sum of the two numbers
-            case 'SUM':
-                c = an + bn;
-                break;
-
-            // Subtraction of the second number from the first
-            case 'SUBTRACT':
-                c = an - bn;
-                break;
-
-            // Division of the first number by the second
-            case 'DIVIDE':
-                // Handle division by zero
-                if (bn === 0) {
-                    c = "Error";  // Return error if division by zero
-                } else {
-                    c = an / bn;  // Otherwise, perform the division
-                }
-                break;
-        }
-
-        // Return the result of the calculation
-        return c;
+const Utils = {
+  // Function to perform calculation based on the type (SUM, SUBTRACT, DIVIDE)
+  calculateNumber(type, a, b) {
+    // If the operation is SUM, round both numbers and add them
+    if (type === 'SUM') {
+      return Math.round(a) + Math.round(b);
     }
-}
+    // If the operation is SUBTRACT, round both numbers and subtract
+    if (type === 'SUBTRACT') {
+      return Math.round(a) - Math.round(b);
+    }
+    // If the operation is DIVIDE, check if the divisor is 0 and return 'Error' if true, otherwise perform the division
+    if (type === 'DIVIDE') {
+      return Math.round(b) === 0 ? 'Error' : Math.round(a) / Math.round(b);
+    }
+    // Default return value when the type does not match any operation
+    return 0;
+  },
+};
 
-// Export the Utils class so it can be used in other files
-export default Utils;
+module.exports = Utils;
