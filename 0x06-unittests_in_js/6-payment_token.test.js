@@ -1,18 +1,18 @@
-// Import the getPaymentTokenFromAPI function and testing libraries
-const getPaymentTokenFromAPI = require("./6-payment_token");
-const { describe, it } = require("mocha");
-const expect = require("chai").expect;
+// Importing the 'expect' assertion function from the 'chai' library for testing
+const { expect } = require('chai');
+// Importing the 'getPaymentTokenFromAPI' function from the '6-payment_token' file
+const getPaymentTokenFromAPI = require('./6-payment_token');
 
-describe("getPaymentTokenFromAPI", function() {
-    // Define the test case for async functionality using the done callback
-    it("Async testing with done callback", function(done) {
-        // Call the getPaymentTokenFromAPI function with 'true' to simulate success
-        getPaymentTokenFromAPI(true)
-            .then((data) => {
-                // Check if the returned data has the 'data' property
-                expect(data).to.have.property('data');
-                // Indicate that the test is done
-                done();
-            });
-    });
+describe('getPaymentTokenFromAPI', () => {
+  // Test case for when the 'success' parameter is true
+  it('getPaymentTokenFromAPI(success), where success == true', (done) => {
+    // Call the 'getPaymentTokenFromAPI' function with 'true' to simulate success
+    getPaymentTokenFromAPI(true)
+      .then((res) => {
+        // Assert that the response from the API matches the expected successful response
+        expect(res).to.deep.equal({data: 'Successful response from the API'});
+        // Indicate the completion of the asynchronous test
+        done();
+      });
+  });
 });
