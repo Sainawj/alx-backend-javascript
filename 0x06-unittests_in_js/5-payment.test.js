@@ -1,37 +1,41 @@
-// Import Mocha functions (describe, it), Sinon for spies, Chai for assertions
-const { describe, it } = require("mocha");
-const sinon = require("sinon");
-const sendPaymentRequestToApi = require("./5-payment"); // Function to be tested
-const expect = require("chai").expect; // Chai assertion library
+// Import the sinon library for spying and stubbing, and expect from chai for assertions
+const sinon = require('sinon');
+const { expect } = require('chai');
 
-// Describe the test suite for the 'sendPaymentRequestToApi' function
-describe("sendPaymentRequestToApi", function() {
+// Import the sendPaymentRequestToApi function to be tested
+const sendPaymentRequestToApi = require('./5-payment');
 
-    // Set up a spy on console.log before each test runs
-    beforeEach("Set up spy to use for each test", function() {
-        sinon.spy(console, "log");
-    });
+describe('sendPaymentRequestToApi', () => {
+  // Declare a variable for the spy
+  let bigBrother;
 
-    // Restore the original console.log after each test
-    afterEach("restore spy after each test", function() {
-        console.log.restore();
-    });
+  // Set up the spy before each test
+  beforeEach(() => {
+    if (!bigBrother) {
+      bigBrother = sinon.spy(console); // Create a spy for console.log
+    }
+  });
 
-    // Test case: Check if console.log is called with the correct argument when payment is made
-    it("check that console.log is called with the right arg", function() {
-        // Call the function under test
-        sendPaymentRequestToApi(100, 20);
+  // Reset the history of the spy after each test
+  afterEach(() => {
+    bigBrother.log.resetHistory(); // Reset the spy's call history
+  });
 
-        // Assert that console.log was called with the expected string exactly once
-        expect(console.log.withArgs("The total is: 120").calledOnce).to.be.true;
-    });
+  // Test case 1: Check that the correct total is logged when sendPaymentRequestToApi is called with (100, 20)
+  it('sendPaymentRequestToApi(100, 20) logs "The total is: 120" to the console', () => {
+    sendPaymentRequestToApi(100, 20); // Call the function
+    // Assert that the correct message was logged
+    expect(bigBrother.log.calledWith('The total is: 120')).to.be.true;
+    // Assert that the log method was called exactly once
+    expect(bigBrother.log.calledOnce).to.be.true;
+  });
 
-    // Test case: Check if console.log is called with the correct argument for another total
-    it("check that console.log is called with the right arg", function() {
-        // Call the function under test
-        sendPaymentRequestToApi(10, 10);
-
-        // Assert that console.log was called with the expected string exactly once
-        expect(console.log.withArgs("The total is: 20").calledOnce).to.be.true;
-    });
+  // Test case 2: Check that the correct total is logged when sendPaymentRequestToApi is called with (10, 10)
+  it('sendPaymentRequestToApi(10, 10) logs "The total is: 20" to the console', () => {
+    sendPaymentRequestToApi(10, 10); // Call the function
+    // Assert that the correct message was logged
+    expect(bigBrother.log.calledWith('The total is: 20')).to.be.true;
+    // Assert that the log method was called exactly once
+    expect(bigBrother.log.calledOnce).to.be.true;
+  });
 });
