@@ -1,13 +1,13 @@
-// Function to simulate API response with a payment token, depending on the success parameter
-function getPaymentTokenFromAPI(success) {
-    // Check if success is true
-    if (success) {
-        // Return a Promise that resolves with a successful response object
-        return new Promise((resolve) => {
-            resolve({ data: 'Successful response from the API' });
-        });
-    }
-}
+// Function to simulate getting a payment token from an API
+// The function returns a Promise that resolves with a successful response if the 'success' parameter is true
+const getPaymentTokenFromAPI = (success) => new Promise((resolve, _reject) => {
+  // Check if the 'success' flag is true
+  if (success) {
+    // Resolve the promise with a simulated successful API response
+    resolve({data: 'Successful response from the API'});
+  }
+});
 
-// Export the function to be used in other modules
-export default getPaymentTokenFromAPI;
+// Export the function for use in other parts of the application
+module.exports = getPaymentTokenFromAPI;
+
