@@ -24,4 +24,4 @@ function calculateNumber(type, a, b) {
 }
 
 // Export the function for use in other modules
-export default calculateNumber;
+module.exports = calculateNumber;
