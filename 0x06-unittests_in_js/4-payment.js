@@ -1,13 +1,14 @@
-// Import the 'Utils' module to access its functions
-const Utils = require("./utils");
+// Importing the Utils module to access the calculateNumber function
+const Utils = require('./utils');
 
-// Function to send a payment request to the API by calculating the total amount
-function sendPaymentRequestToApi(totalAmount, totalShipping) {
-    // Use the 'calculateNumber' function from Utils to calculate the total
-    const result = Utils.calculateNumber("SUM", totalAmount, totalShipping);
-    // Log the result to the console
-    console.log(`The total is: ${result}`);
-}
+// Function to send a payment request and log the total cost
+const sendPaymentRequestToApi = (totalAmount, totalShipping) => {
+  // Calculate the total cost by adding totalAmount and totalShipping using the 'SUM' operation
+  const totalCost = Utils.calculateNumber('SUM', totalAmount, totalShipping);
+  // Log the total cost to the console
+  console.log(`The total is: ${totalCost}`);
+};
 
-// Export the function for use in other parts of the application
+// Exporting the function to be used in other modules
 module.exports = sendPaymentRequestToApi;
+
